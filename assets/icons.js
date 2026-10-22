@@ -1,0 +1,23 @@
+/* Line icons on a 24px grid. To swap in official Atlassian assets later,
+   drop the SVG/PNG files into assets/ and replace the matching entry with an <img>. */
+window.SDLC_ICONS = {
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ page:'<path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+ epic:'<path d="M13 2 5 14h6l-1 8 8-12h-6z"/>',
+ check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ story:'<path d="M7 3h10v18l-5-4-5 4z"/>',
+ shield:'<path d="M12 3 5 6v6c0 4 3 7.5 7 9 4-1.5 7-5 7-9V6z"/><path d="m9 12 2 2 4-4"/>',
+ estimate:'<path d="M4 17 17 4l3 3L7 20H4z"/><path d="m13 8 2 2M10 11l2 2M7 14l2 2"/>',
+ sprint:'<path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/>',
+ handoff:'<rect x="3" y="4" width="18" height="14" rx="2"/><path d="m8 9 3 2-3 2M13 14h4"/>',
+ book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+ agent:'<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/><path d="M12 2l.8 1.6L14.4 4l-1.6.8L12 6.4l-.8-1.6L9.6 4l1.6-.4z"/>',
+ review:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ bug:'<rect x="7" y="7" width="10" height="13" rx="5"/><path d="M12 7V4M9 4l1.5 3M15 4l-1.5 3M3 12h4M17 12h4M4 18l3-2M20 18l-3-2M12 11v9"/>',
+ pipeline:'<circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.3 7.2 15.7 11M8.3 16.8l7.4-3.8"/>',
+ search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+ automation:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+ align:'<path d="M4 6h16M4 12h10M4 18h13"/><circle cx="19" cy="12" r="2"/>',
+ code:'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
+ loop:'<path d="M7 8c-2.8 0-4 2-4 4s1.2 4 4 4c4 0 6-8 10-8 2.8 0 4 2 4 4s-1.2 4-4 4c-4 0-6-8-10-8z"/>'
+};
