@@ -19,5 +19,7 @@ window.SDLC_ICONS = {
  automation:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
  align:'<path d="M4 6h16M4 12h10M4 18h13"/><circle cx="19" cy="12" r="2"/>',
  code:'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
- loop:'<path d="M7 8c-2.8 0-4 2-4 4s1.2 4 4 4c4 0 6-8 10-8 2.8 0 4 2 4 4s-1.2 4-4 4c-4 0-6-8-10-8z"/>'
+ loop:'<path d="M7 8c-2.8 0-4 2-4 4s1.2 4 4 4c4 0 6-8 10-8 2.8 0 4 2 4 4s-1.2 4-4 4c-4 0-6-8-10-8z"/>',
+ gate:'<path d="M12 3 5 6v6c0 4 3 7.5 7 9 4-1.5 7-5 7-9V6z"/><path d="m9 12 2 2 4-4"/>',
+ reset:'<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/>'
 };

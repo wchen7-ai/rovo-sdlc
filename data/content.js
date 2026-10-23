@@ -1,5 +1,5 @@
 /* Rovo SDLC — single source of truth for all copy and step data.
-   Edit text, steps, challenges and product names here only.
+   Edit text, stages, challenges, steps and product names here only.
    Every string has an `en` and `zh` (Simplified Chinese) version; product names stay in English. */
 
 window.SDLC = {};
@@ -12,8 +12,13 @@ en:{
  lede:"AI coding assistants speed up the 16% of time spent in the editor. Rovo, Jira and Confluence work on the rest of the loop: turning ideas into clear requirements and ready work, then giving developers the context, standards and agents to ship.",
  heroTitle16:"GenAI gains in the IDE / Editor",
  heroTitle84:"Dev productivity challenges everywhere else",
+ ofDev:"of dev time",
  cap16:"of dev time is coding and testing, where most AI tools focus today.",
  cap84:"of dev time goes to aligning, interpreting, translating, reviewing and planning.",
+ aText:"We often assume the biggest efficiency bottleneck happens during coding. That's why many AI tools focus heavily on improving individual developer productivity. But if you step back and look at the full lifecycle, code writing is only one part of delivery.",
+ bText:"A large amount of team time (84%) is actually spent aligning on requirements, interpreting documents, translating context into tasks, reviewing standards, and planning execution.",
+ note84:"Even inside Develop and Test, most time goes to work around the code.",
+ reset:"Reset",
  keyP1:"Alignment to execution · Discover + Plan",
  keyP2:"Developer productivity · Develop → Test → Deploy",
  p1Kicker:"Part 1 · Alignment to execution",
@@ -29,8 +34,9 @@ en:{
  p2Why:"Once work is ready, Rovo Dev carries the Jira and Confluence context into the coding tools, applies the team's standards, and handles first-pass review, security fixes and broken builds, with people approving each change.",
  verbs2:["Start with context","Enforce standards","Delegate to agents","Review faster","Fix vulnerabilities","Keep pipelines green"],
  fbTitle:"Continuous feedback",
- fbText:"Decisions, PR outcomes and post-incident learnings are written back to Confluence and connected in Teamwork Graph, so the next Charter starts from what the team already knows.",
- what:"What Rovo does",removes:"Challenges addressed",products:"Products",gates:"Gate"
+ fbText84:"Decisions, PR outcomes and post-incident learnings are written back to Confluence and connected in Teamwork Graph, so the next Charter starts from what the team already knows.",
+ fbText16:"PR review outcomes, coding-standard fixes and pipeline failures are written back to Confluence and connected in Teamwork Graph, so the next coding session, for people and agents alike, starts from what the team has already learned.",
+ what:"What Rovo does",removes:"Challenges addressed",products:"Products",stage:"Loop stage",gates:"Gate"
 },
 zh:{
  crumb:"SDLC 用例",
@@ -38,12 +44,17 @@ zh:{
  lede:"AI 编码助手提升的是在编辑器里的 16% 时间。Rovo、Jira 与 Confluence 作用于循环的其余部分：先把想法转化为清晰的需求与可执行的工作，再为开发者提供上下文、规范与 Agent，加速交付。",
  heroTitle16:"GenAI 在 IDE / 编辑器中的提升",
  heroTitle84:"其余环节的研发效率挑战",
+ ofDev:"的研发时间",
  cap16:"的研发时间用于编码与测试，也是目前多数 AI 工具关注的地方。",
  cap84:"的研发时间花在对齐、理解、转化、评审与规划上。",
+ aText:"我们常以为最大的效率瓶颈出现在编码阶段，因此许多 AI 工具都着重提升个人开发者的生产力。但从完整的生命周期来看，写代码只是交付的一部分。",
+ bText:"团队大量的时间（84%）实际花在对齐需求、理解文档、把上下文转化为任务、评审规范与规划执行上。",
+ note84:"即使在开发与测试阶段，大部分时间也花在代码之外的工作上。",
+ reset:"重置",
  keyP1:"从对齐到执行 · 发现 + 规划",
  keyP2:"开发者生产力 · 开发 → 测试 → 部署",
  p1Kicker:"第一部分 · 从对齐到执行",
- p1Title:"从 Charter 到 Sprint：在写第一行代码之前完成对齐",
+ p1Title:"从项目章程到 Sprint：在写第一行代码之前完成对齐",
  p1Why:"多数延误发生在开发之前：需求不清晰、文档找不到、上下文在 Confluence 与 Jira 之间丢失、规划依赖少数资深成员。Rovo 让每一步都可复用，并自动执行每一道关卡的检查。",
  verbs1:["对齐需求","理解文档","将上下文转化为任务","评审规范","规划执行"],
  gateA:"工件检查（Artefact checking）",
@@ -55,19 +66,22 @@ zh:{
  p2Why:"工作就绪后，Rovo Dev 把 Jira 与 Confluence 的上下文带进编码工具，套用团队规范，并完成首轮评审、安全修复与构建修复，每一项变更都由人审批。",
  verbs2:["带上下文开工","强制执行规范","委派给 Agent","加快评审","修复漏洞","保持流水线绿灯"],
  fbTitle:"持续反馈",
- fbText:"决策、PR 结果与事后复盘写回 Confluence，并在 Teamwork Graph 中关联，下一份 Charter 便能从团队已有的知识出发。",
- what:"Rovo 做什么",removes:"解决的挑战",products:"产品",gates:"关卡"
+ fbText84:"决策、PR 结果与事后复盘写回 Confluence，并在 Teamwork Graph 中关联，下一份项目章程便能从团队已有的知识出发。",
+ fbText16:"PR 评审结果、编码规范的修正与流水线失败记录写回 Confluence，并在 Teamwork Graph 中关联，下一次编码时，开发者与 Agent 都能从团队已有的经验出发。",
+ what:"Rovo 做什么",removes:"解决的挑战",products:"产品",stage:"循环阶段",gates:"关卡"
 }};
 
-/* ---------------- infinity loop stages ----------------
-   in84: true = part of the "84% everywhere else" highlight. Order matters (drawn clockwise). */
+/* ---------------- the 7 stages, in loop order ----------------
+   Left loop: discover → plan → develop → test · centre crossover · Right loop: deploy → operate → feedback · back to discover.
+   in16 = a coding stage (lit by the 16% card). */
 SDLC.STAGES = [
- {id:"discover",en:["DISCOVER +","PRIORITIZE"],zh:["发现 +","排序"],in84:true},
- {id:"plan",en:["PLAN +","TRACK"],zh:["规划 +","跟踪"],in84:true},
- {id:"develop",en:["DEVELOP"],zh:["开发"],in84:false},
- {id:"test",en:["TEST"],zh:["测试"],in84:false},
- {id:"deploy",en:["DEPLOY"],zh:["部署"],in84:true},
- {id:"operate",en:["OPERATE +","SUPPORT"],zh:["运维 +","支持"],in84:true}
+ {id:"discover",in16:false,en:"DISCOVER + PRIORITIZE",zh:"发现 + 排序"},
+ {id:"plan",in16:false,en:"PLAN + TRACK",zh:"规划 + 跟踪"},
+ {id:"develop",in16:true,en:"DEVELOP",zh:"开发"},
+ {id:"test",in16:true,en:"TEST",zh:"测试"},
+ {id:"deploy",in16:false,en:"DEPLOY",zh:"部署"},
+ {id:"operate",in16:false,en:"OPERATE + SUPPORT",zh:"运维 + 支持"},
+ {id:"feedback",in16:false,en:"CONTINUOUS FEEDBACK",zh:"持续反馈"}
 ];
 SDLC.STAGE_NAME = {
  discover:{en:"Discover + Prioritize",zh:"发现 + 排序"},
@@ -75,29 +89,39 @@ SDLC.STAGE_NAME = {
  develop:{en:"Develop",zh:"开发"},
  test:{en:"Test",zh:"测试"},
  deploy:{en:"Deploy",zh:"部署"},
- operate:{en:"Operate + Support",zh:"运维 + 支持"}
+ operate:{en:"Operate + Support",zh:"运维 + 支持"},
+ feedback:{en:"Continuous Feedback",zh:"持续反馈"}
 };
 
-/* ---------------- challenges around the loop ----------------
-   x/y are positions in the loop's SVG coordinates; a = text anchor (start | middle | end). */
+/* ---------------- the 17 challenges, each used once ----------------
+   st = the stage it belongs to. x/y = box centre in the loop's SVG coordinates (viewBox -720 -375 1440 705).
+   Every box is placed in its own stage's zone, and a short connector is drawn to the nearest point on that stage.
+   Boxes in a stack are 48 units apart. */
 SDLC.CH = {
- feedback:{en:"Processing user feedback",zh:"处理用户反馈",x:-330,y:-196,a:"middle"},
- prioritize:{en:"Prioritizing ideas",zh:"想法优先级排序",x:-120,y:-196,a:"middle"},
- requirements:{en:"Missing clear requirements",zh:"需求不清晰",x:-372,y:-70,a:"end"},
- docs:{en:"Finding docs",zh:"查找文档",x:-372,y:-18,a:"end"},
- coldstart:{en:"Developer cold starts",zh:"开发者冷启动",x:-372,y:34,a:"end"},
- sprint:{en:"Slow sprint planning",zh:"Sprint 规划缓慢",x:-360,y:150,a:"middle"},
- ownership:{en:"Missing clear ownership",zh:"职责归属不清",x:-165,y:180,a:"middle"},
- compliance:{en:"Missing compliance",zh:"合规缺失",x:-30,y:220,a:"middle"},
- coverage:{en:"Poor code coverage",zh:"代码覆盖率低",x:115,y:-196,a:"middle"},
- pr:{en:"Slow PR reviews",zh:"PR 评审缓慢",x:300,y:-196,a:"middle"},
- drift:{en:"Configuration drift",zh:"配置漂移",x:430,y:-128,a:"start"},
- deps:{en:"Dependency blockers",zh:"依赖阻塞",x:372,y:-50,a:"start"},
- manual:{en:"Manual steps",zh:"手动步骤",x:372,y:2,a:"start"},
- nodocs:{en:"Lack of documentation",zh:"文档缺失",x:372,y:54,a:"start"},
- debt:{en:"Tech debt",zh:"技术债务",x:420,y:128,a:"start"},
- flags:{en:"Feature flag clutter",zh:"Feature flag 杂乱",x:290,y:182,a:"middle"},
- instr:{en:"Inconsistent instrumentation",zh:"埋点与监控不一致",x:105,y:220,a:"middle"}
+ /* Discover + Prioritize · above the top-left of the loop */
+ prioritize:{st:"discover",en:"Prioritizing ideas",zh:"想法优先级排序",x:-160,y:-245},
+ requirements:{st:"discover",en:"Missing clear requirements",zh:"需求不清晰",x:-160,y:-293},
+ /* Plan + Track · left column, above the far-left point */
+ sprint:{st:"plan",en:"Slow sprint planning",zh:"Sprint 规划缓慢",x:-560,y:-110},
+ ownership:{st:"plan",en:"Missing clear ownership",zh:"职责归属不清",x:-560,y:-158},
+ deps:{st:"plan",en:"Dependency blockers",zh:"依赖阻塞",x:-560,y:-206},
+ /* Develop · left column, below the far-left point */
+ coldstart:{st:"develop",en:"Developer cold starts",zh:"开发者冷启动",x:-560,y:110},
+ docs:{st:"develop",en:"Finding docs",zh:"查找文档",x:-560,y:158},
+ debt:{st:"develop",en:"Tech debt",zh:"技术债务",x:-560,y:206},
+ pr:{st:"develop",en:"Slow PR reviews",zh:"PR 评审缓慢",x:-560,y:254},
+ /* Test · below the bottom-left of the loop */
+ coverage:{st:"test",en:"Poor code coverage",zh:"代码覆盖率低",x:-160,y:245},
+ compliance:{st:"test",en:"Missing compliance",zh:"合规缺失",x:-160,y:293},
+ /* Deploy · above the top-right of the loop */
+ manual:{st:"deploy",en:"Manual steps",zh:"手动步骤",x:160,y:-245},
+ drift:{st:"deploy",en:"Configuration drift",zh:"配置漂移",x:160,y:-293},
+ flags:{st:"deploy",en:"Feature flag clutter",zh:"Feature flag 杂乱",x:160,y:-341},
+ /* Operate + Support · right column, beside the far-right point */
+ instr:{st:"operate",en:"Inconsistent instrumentation",zh:"埋点与监控不一致",x:560,y:-24},
+ nodocs:{st:"operate",en:"Lack of documentation",zh:"文档缺失",x:560,y:24},
+ /* Continuous Feedback · below the bottom-right of the loop */
+ feedback:{st:"feedback",en:"Processing user feedback",zh:"处理用户反馈",x:160,y:245}
 };
 
 /* ---------------- Part 1 · Alignment to execution ----------------
@@ -107,11 +131,11 @@ SDLC.CH = {
 SDLC.P1 = [
  {n:1,ic:"flag",hl:false,stage:"discover",marks:[],
   en:{nm:"Charter",t:"Project kickoff with a Charter agent",d:["Rovo pulls existing pages, Jira work and people from Teamwork Graph to draft goals, scope, stakeholders and risks","The team reviews and aligns on one Confluence page from day one"]},
-  zh:{nm:"Charter",t:"用 Charter Agent 启动项目",d:["Rovo 从 Teamwork Graph 汇集相关页面、Jira 工作与人员，起草目标、范围、干系人与风险","团队从第一天就在同一个 Confluence 页面上对齐"]},
+  zh:{nm:"项目章程",t:"用项目章程 Agent 启动项目",d:["Rovo 从 Teamwork Graph 汇集相关页面、Jira 工作与人员，起草目标、范围、干系人与风险","团队从第一天就在同一个 Confluence 页面上对齐"]},
   ch:["ownership","requirements","coldstart"],pr:["Rovo Agents","Confluence","Teamwork Graph"]},
  {n:2,ic:"page",hl:false,stage:"discover",marks:[],
   en:{nm:"PRD",t:"Charter to PRD",d:["Rovo turns the agreed charter into a structured PRD: user stories, non-functional requirements and acceptance criteria","Every section cites its source page, so reviewers can trace where it came from"]},
-  zh:{nm:"PRD",t:"从 Charter 到 PRD",d:["Rovo 把已达成共识的 Charter 转为结构化 PRD：用户故事、非功能需求与验收标准","每一节都引用来源页面，评审者可以追溯出处"]},
+  zh:{nm:"PRD",t:"从项目章程到 PRD（产品需求文档）",d:["Rovo 把已达成共识的项目章程转为结构化 PRD：用户故事、非功能需求与验收标准","每一节都引用来源页面，评审者可以追溯出处"]},
   ch:["requirements","docs","nodocs"],pr:["Rovo","Confluence"]},
  {n:3,ic:"epic",hl:true,stage:"plan",marks:["w"],
   en:{nm:"Epic",t:"Confluence to Jira Epic",d:["Create Jira epics directly from the PRD, linked back to the page","Requirements and decisions travel with the work, so context is never lost"]},
